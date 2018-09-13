@@ -6,6 +6,7 @@ TagManager:
   tags:
   - canWalk
   - cannotWalk
+  - Grid
   layers:
   - Default
   - TransparentFX

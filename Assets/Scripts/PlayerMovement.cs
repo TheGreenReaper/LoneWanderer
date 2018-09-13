@@ -8,7 +8,6 @@
     private Vector2 nextPosition;
     private Vector2 currentPosition;
     private List<Point> path;
-    private GameObject tile;
     private Point _to;
     private Point _from;
 
@@ -33,24 +32,17 @@
         {
             SetNextNode();
         }
-            
-        //path.RemoveAt(0);
-        //}
     }
 
     void FindPath()
     {
-        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-        if (hit.collider != null)
-        {
-            tile = hit.collider.gameObject;
-            if (tile.tag == "canWalk")
-            {
-                _to = new Point(Mathf.RoundToInt(tile.transform.position.x), Mathf.RoundToInt(tile.transform.position.y));
-                _from = new Point(Mathf.RoundToInt(gameObject.transform.position.x), Mathf.RoundToInt(gameObject.transform.position.y));
-                path = Pathfinding.FindPath(gameObject.GetComponent<GridController>().GetGrid(), _from, _to);
-            }
-        }
+        int toX = Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).x);
+        int toY = Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+        _to = new Point(toX, toY);
+        _from = new Point(Mathf.RoundToInt(gameObject.transform.position.x), Mathf.RoundToInt(gameObject.transform.position.y));
+        GameObject grid = GameObject.FindGameObjectWithTag("Grid");
+        path = Pathfinding.FindPath(grid.GetComponent<GridController>().GetGrid(), _from, _to);
+
     }
     void SetNextNode()
     {
@@ -63,7 +55,6 @@
         {
             nextPosition = new Vector2(path[0].x, path[0].y);
             path.RemoveAt(0);
-            Debug.Log("Next Position: " + nextPosition + " Remaining: " + length);
         }
     }
     }

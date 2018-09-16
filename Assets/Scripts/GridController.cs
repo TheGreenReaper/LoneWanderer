@@ -8,12 +8,11 @@ using UnityEngine.Tilemaps;
 public class GridController : MonoBehaviour {
     public int width;
     public int height;
-     GridLayout gridLayout;
-    public Tilemap tile;
+    public Tilemap tileMap;
+    public Sprite[] unwalkableSprites;
+
     Vector3Int cellPosition;
-
-    public string[] cannotWalkTiles;
-
+    GridLayout gridLayout;
 
     void Start ()
     {
@@ -27,21 +26,19 @@ public class GridController : MonoBehaviour {
         {
             for (int y = 0; y < height; y++)
             {
-                cellPosition = gridLayout.LocalToCell(new Vector2(x, y));
-                if (tile.GetSprite(cellPosition) != null)
+                cellPosition = gridLayout.WorldToCell(new Vector2(x, y));
+                if (tileMap.GetSprite(cellPosition) != null)
                 {
-                    for (int z = 0; z < cannotWalkTiles.Length; z++)
+                    for (int z = 0; z < unwalkableSprites.Length; z++)
                     {
-                        Debug.Log(string.Equals(cannotWalkTiles,tile.GetSprite(cellPosition).name));
-                        /*if (cannotWalkTiles[z].CompareTo(tile.GetSprite(cellPosition).name) == 1)
+                        if (unwalkableSprites[z].name.CompareTo(tileMap.GetSprite(cellPosition).name) == 1)
                         {
-                            tilesmap[x, y] = false;
-                            Debug.Log("False at:" + x + " " + y);
+                            tilesmap[x, y] = true;
                         }
                         else
                         {
-                            tilesmap[x, y] = true;
-                        }*/
+                            tilesmap[x, y] = false;
+                        }
                     }
                 }
                 else

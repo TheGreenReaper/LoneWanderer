@@ -11,11 +11,10 @@
     private Point _to;
     private Point _from;
 
-    private void Start()
+    void Start()
     {
         nextPosition = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
     }
-
     void Update()
     {
         
@@ -26,23 +25,24 @@
         }
         if (currentPosition != nextPosition)
         {
-            transform.position = Vector2.Lerp(currentPosition, nextPosition, speed);
+            transform.position = Vector2.MoveTowards(currentPosition, nextPosition, 0.1f);
         }
         if (path != null && currentPosition == nextPosition)
         {
             SetNextNode();
         }
     }
-
     void FindPath()
     {
         int toX = Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).x);
         int toY = Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
-        _to = new Point(toX, toY);
-        _from = new Point(Mathf.RoundToInt(gameObject.transform.position.x), Mathf.RoundToInt(gameObject.transform.position.y));
-        GameObject grid = GameObject.FindGameObjectWithTag("Grid");
-        path = Pathfinding.FindPath(grid.GetComponent<GridController>().GetGrid(), _from, _to);
-
+        if (toX > -1 && toY > -1)
+        {
+            _to = new Point(toX, toY);
+            _from = new Point(Mathf.RoundToInt(gameObject.transform.position.x), Mathf.RoundToInt(gameObject.transform.position.y));
+            GameObject grid = GameObject.FindGameObjectWithTag("Grid");
+            path = Pathfinding.FindPath(grid.GetComponent<GridController>().GetGrid(), _from, _to);
+        }
     }
     void SetNextNode()
     {

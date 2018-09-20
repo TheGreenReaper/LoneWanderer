@@ -8,8 +8,9 @@ using UnityEngine.Tilemaps;
 public class GridController : MonoBehaviour {
     public int width;
     public int height;
-    public Tilemap tileMap;
-    public Sprite[] unwalkableSprites;
+    public Tilemap unwalkable;
+    public Tilemap unwalkable2;
+    //public Sprite[] unwalkableSprites;
 
     Vector3Int cellPosition;
     GridLayout gridLayout;
@@ -18,7 +19,7 @@ public class GridController : MonoBehaviour {
     {
         gridLayout = gameObject.GetComponent<GridLayout>();
     }
-    public PathFind.Grid GetGrid()
+    public PathFind.Grid GetGrid(int npcX, int npcY)
     {
         bool[,] tilesmap = new bool[width, height];
 
@@ -26,27 +27,29 @@ public class GridController : MonoBehaviour {
         {
             for (int y = 0; y < height; y++)
             {
-                cellPosition = gridLayout.WorldToCell(new Vector2(x, y));
-                if (tileMap.GetSprite(cellPosition) != null)
-                {
-                    for (int z = 0; z < unwalkableSprites.Length; z++)
-                    {
-                        if (unwalkableSprites[z].name.CompareTo(tileMap.GetSprite(cellPosition).name) == 1)
-                        {
-                            tilesmap[x, y] = true;
-                        }
-                        else
-                        {
-                            tilesmap[x, y] = false;
-                        }
-                    }
-                }
-                else
+                tilesmap[x, y] = true;
+                cellPosition = gridLayout.WorldToCell(new Vector2(x, y)); //finds position of a grid cell
+                if (unwalkable.GetSprite(cellPosition) != null)
                 {
                     tilesmap[x, y] = false;
                 }
+
+                RaycastHit2D hit = Physics2D.Raycast(new Vector2(x,y), Vector2.zero);
+                if (hit.collider != null)
+                {
+                    if (hit.collider.tag == "Unwalkable")
+                    {
+                        tilesmap[x, y] = false;
+                    }
+                }
+
+                if (npcX == x && npcY == y)
+                {
+                    tilesmap[x, y] = true;
+                }
             }
         }
+
         PathFind.Grid grid = new PathFind.Grid(width, height, tilesmap);
         return grid;
     }

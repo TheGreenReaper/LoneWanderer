@@ -15,6 +15,7 @@
     private int width;
     private int height;
     private GameObject grid;
+    public GameObject nextLocationSprite;
     void Start()
     {
         nextPosition = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
@@ -24,7 +25,7 @@
     }
     void Update()
     {
-        
+        nextLocationSprite.transform.position = nextPosition;
         currentPosition = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
         if (Input.GetMouseButtonDown(1))
         {

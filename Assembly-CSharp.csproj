@@ -74,6 +74,7 @@
     <Compile Include="Assets\Scripts\OOTB\PathFinding.cs" />
     <Compile Include="Assets\Scripts\OOTB\Point.cs" />
     <Compile Include="Assets\Scripts\PickUpItem.cs" />
+    <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Save.cs" />
     <Reference Include="UnityEditor.StandardEvents">

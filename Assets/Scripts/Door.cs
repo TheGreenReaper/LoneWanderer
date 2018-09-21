@@ -13,7 +13,7 @@ public class Door : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         Vector2 playerPosition = new Vector2(player.transform.position.x, player.transform.position.y);
         Vector2 currentPosition = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
-        Debug.Log(Vector2.Distance(playerPosition, currentPosition));
+
         if (Vector2.Distance(playerPosition, currentPosition) < 2 && Input.GetKeyDown(KeyCode.F)){
             Destroy(gameObject);
         }

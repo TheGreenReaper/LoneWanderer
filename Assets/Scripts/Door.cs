@@ -6,7 +6,6 @@ public class Door : MonoBehaviour
 {
     private void Start()
     {
-        Debug.Log(gameObject.tag);
     }
     private void Update()
     {

@@ -6,31 +6,29 @@ using PathFind;
 public class Player : MonoBehaviour {
     public float speed;
     public GameObject nextLocationSprite;
-    public GameObject grid;
 
     private Vector2 nextPosition;
     private Vector2 currentPosition;
     private List<Point> path;
     private Point _to;
     private Point _from;
+    private GameObject grid;
 
     // Use this for initialization
     void Start () {
         nextPosition = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
+        grid = GameObject.FindGameObjectWithTag("Grid");
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
         nextLocationSprite.transform.position = nextPosition;
 
         /*sets origin and destination*/
-        if (Input.GetMouseButtonDown(1)) 
+        if (Input.GetMouseButtonDown(1))
         {
-            int toX = Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).x); //mouse x location
-            int toY = Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).y); //mouse y location
-            _to = new Point(toX, toY);
-            _from = new Point(Mathf.RoundToInt(gameObject.transform.position.x), Mathf.RoundToInt(gameObject.transform.position.y));
-            path = Pathfinding.FindPath(grid.GetComponent<GridController>().GetGridDefault(), _from, _to);
+            RefreshPath();
         }
         /*sets path using origin and destination*/
 
@@ -46,6 +44,14 @@ public class Player : MonoBehaviour {
         }
         /*if player has reached the next not final position, change it*/
 
+    }
+    void RefreshPath()
+    {
+        int toX = Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).x); //mouse x location
+        int toY = Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).y); //mouse y location
+        _to = new Point(toX, toY);
+        _from = new Point(Mathf.RoundToInt(gameObject.transform.position.x), Mathf.RoundToInt(gameObject.transform.position.y));
+        path = Pathfinding.FindPath(grid.GetComponent<GridController>().GetGridDefault(), _from, _to);
     }
 
     void SetNextNode()

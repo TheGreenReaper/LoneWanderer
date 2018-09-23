@@ -7,7 +7,6 @@ public class PickUpItem : MonoBehaviour {
 
     private void Start()
     {
-        Debug.Log(gameObject.tag);
     }
     private void Update()
     {

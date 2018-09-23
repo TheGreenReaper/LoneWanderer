@@ -65,7 +65,9 @@
     <Compile Include="Assets\Scripts\Battleground\Battleground.cs" />
     <Compile Include="Assets\Scripts\Battleground\EnemyScript.cs" />
     <Compile Include="Assets\Scripts\Battleground\Stats.cs" />
+    <Compile Include="Assets\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\Door.cs" />
+    <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\GridController.cs" />
     <Compile Include="Assets\Scripts\Inventory.cs" />
     <Compile Include="Assets\Scripts\InventorySlot.cs" />
@@ -75,7 +77,6 @@
     <Compile Include="Assets\Scripts\OOTB\Point.cs" />
     <Compile Include="Assets\Scripts\PickUpItem.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
-    <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Save.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>D:/Unity/LoneWanderer/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>

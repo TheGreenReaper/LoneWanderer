@@ -68,14 +68,14 @@ namespace PathFind
                         continue;
                     int checkX = node.gridX + x;
                     int checkY = node.gridY + y;
-                    /*if (x == 1 && y == 1)
+                    if (x == 1 && y == 1)
                         continue;
                     if (x == -1 && y == 1)
                         continue;
                     if (x == 1 && y == -1)
                         continue;
                     if (x == -1 && y == -1)
-                        continue;*/
+                        continue;
                     //For example, the diagonal neighbor at (x + 1, y + 1) can't be reached if the cell at (x, y + 1) or (x + 1, y) is impassable.
                     if (checkX >= 0 && checkX < gridSizeX && checkY >= 0 && checkY < gridSizeY)
                     {
